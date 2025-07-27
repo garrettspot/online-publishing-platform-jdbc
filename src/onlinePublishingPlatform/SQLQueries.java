@@ -230,7 +230,6 @@ public class SQLQueries {
     ('Science', 'science', 'Discoveries and research across scientific disciplines'),
     ('Lifestyle', 'lifestyle', 'Daily life tips and cultural trends');
 
-    -- Insert tags
     INSERT INTO tags (name, slug) VALUES
     ('AI', 'artificial-intelligence'),
     ('Blockchain', 'blockchain'),
@@ -241,13 +240,11 @@ public class SQLQueries {
     ('Productivity', 'productivity'),
     ('Remote Work', 'remote-work');
 
-    -- Insert series (using proper author_ids from the authors table)
     INSERT INTO series (name, description, author_id) VALUES
     ('Tech Trends 2023', 'A comprehensive look at emerging technologies in 2023', 1),
     ('Startup Success', 'Strategies for building and growing successful startups', 2),
     ('Mindful Living', 'A guide to mental health and balanced lifestyle', 3);
 
-    -- Insert articles with proper author_id and series_id references
     INSERT INTO articles (title, slug, content_draft, content_published, status, created_at, published_at, primary_category_id, author_id, series_id, is_premium, view_count) VALUES
     ('The Future of AI', 'future-of-ai', 'Draft content about AI...', 'Published content about AI...', 'published', '2023-01-20', '2023-01-25', 1, 1, 1, false, 1500),
     ('Blockchain in Finance', 'blockchain-finance', 'Draft content about blockchain...', 'Published content about blockchain...', 'published', '2023-02-15', '2023-02-20', 2, 2, 2, true, 1200),
@@ -260,7 +257,6 @@ public class SQLQueries {
     ('Tech Gadgets 2023', 'tech-gadgets-2023', 'Draft content about gadgets...', NULL, 'archived', '2023-01-05', '2023-01-10', 1, 1, 1, false, 300),
     ('Financial Planning Basics', 'financial-planning', 'Draft content about finance...', 'Published content about finance...', 'published', '2023-09-01', '2023-09-10', 2, 2, NULL, true, 700);
 
-    -- Insert article tags
     INSERT INTO article_tags (article_id, tag_id) VALUES
     (1, 1), (1, 7),
     (2, 2), (2, 3),
@@ -273,20 +269,33 @@ public class SQLQueries {
     (9, 1),
     (10, 3), (10, 7);
 
-    -- Insert article reviews
     INSERT INTO article_reviews (article_id, reviewer_id, status, feedback_notes, created_at) VALUES
     (3, 2, 'needs_changes', 'Please expand the section on meditation techniques and add references.', '2023-03-12'),
     (7, 2, 'approved', 'Well-researched and clearly written. Ready for publication.', '2023-07-17');
 
-    -- Insert article purchases
     INSERT INTO article_purchases (user_id, article_id, primary_category_id, amount_paid, currency, purchase_date) VALUES
-    (5, 2, 2, 1.99, 'USD', '2023-03-01'),
-    (6, 2, 2, 1.99, 'USD', '2023-03-05'),
-    (7, 6, 2, 1.99, 'USD', '2023-07-01'),
-    (8, 10, 2, 1.99, 'USD', '2023-09-15'),
-    (5, 6, 2, 1.99, 'USD', '2023-07-10');
+    (5, 1, 1, 1.99, 'USD', '2023-01-26 10:35:00'),  -- Future of AI
+    (6, 1, 1, 1.99, 'USD', '2023-01-27 11:40:00'),
+    (7, 1, 1, 1.99, 'USD', '2023-01-28 09:15:00'),
+    (5, 4, 1, 2.99, 'USD', '2023-04-10 14:20:00'),  -- Quantum Computing
+    (6, 4, 1, 2.99, 'USD', '2023-04-11 16:30:00'),
+    (8, 9, 1, 1.49, 'USD', '2023-01-15 13:45:00'),  -- Tech Gadgets
+    (5, 2, 2, 3.99, 'USD', '2023-02-21 11:25:00'),  -- Blockchain in Finance
+    (6, 2, 2, 3.99, 'USD', '2023-02-22 10:15:00'),
+    (7, 2, 2, 3.99, 'USD', '2023-02-23 14:30:00'),
+    (8, 2, 2, 3.99, 'USD', '2023-02-24 16:45:00'),
+    (5, 6, 2, 2.99, 'USD', '2023-06-25 09:20:00'),  -- Startup Funding
+    (6, 6, 2, 2.99, 'USD', '2023-06-26 11:35:00'),
+    (7, 10, 2, 1.99, 'USD', '2023-09-12 13:50:00'), -- Financial Planning
+    (8, 10, 2, 1.99, 'USD', '2023-09-13 15:05:00'),
+    (5, 3, 3, 1.49, 'USD', '2023-03-15 10:10:00'),  -- Mindfulness
+    (6, 5, 3, 0.99, 'USD', '2023-05-21 12:25:00'),  -- Healthy Eating
+    (7, 5, 3, 0.99, 'USD', '2023-05-22 14:40:00'),
+    (8, 5, 3, 0.99, 'USD', '2023-05-23 16:55:00'),
+    (5, 8, 5, 1.99, 'USD', '2023-08-17 09:30:00'),  -- Remote Work
+    (6, 8, 5, 1.99, 'USD', '2023-08-18 11:45:00'),
+    (7, 8, 5, 1.99, 'USD', '2023-08-19 14:00:00');
 
-    -- Insert comments
     INSERT INTO comments (article_id, user_id, content, created_at, parent_comment_id) VALUES
     (1, 5, 'Great article! Very insightful.', '2023-01-26 10:30:00', NULL),
     (1, 6, 'I disagree with some points about AI ethics.', '2023-01-26 14:45:00', 1),
@@ -296,7 +305,6 @@ public class SQLQueries {
     (5, 6, 'What about protein intake for athletes?', '2023-05-21 10:10:00', 5),
     (8, 7, 'Remote work has changed my productivity completely.', '2023-08-16 13:25:00', NULL);
 
-    -- Insert article views
     INSERT INTO article_views (article_id, user_id, view_timestamp, ip_address) VALUES
     (1, 5, '2023-01-26 10:25:00', '192.168.1.1'),
     (1, 6, '2023-01-26 14:40:00', '192.168.1.2'),
@@ -310,7 +318,6 @@ public class SQLQueries {
     (8, 7, '2023-08-16 13:20:00', '192.168.1.3'),
     (8, NULL, '2023-08-17 14:30:00', '198.51.100.33');
 
-    -- Insert article votes
     INSERT INTO article_votes (user_id, article_id, vote_type, voted_at) VALUES
     (5, 1, 'upvote', '2023-01-26 10:35:00'),
     (6, 1, 'downvote', '2023-01-26 14:50:00'),
@@ -318,6 +325,12 @@ public class SQLQueries {
     (8, 2, 'upvote', '2023-02-21 11:25:00'),
     (5, 5, 'upvote', '2023-05-20 16:35:00'),
     (7, 8, 'upvote', '2023-08-16 13:30:00');
+
+    
+    INSERT INTO subscription_plans (name, price_monthly, price_annually, description, is_active) VALUES
+    ('Basic', 9.99, 99.99, 'Access to standard articles', true),
+    ('Premium', 19.99, 199.99, 'Access to premium content and early releases', true),
+    ('Pro', 29.99, 299.99, 'All features plus exclusive content and community access', true);
 
     INSERT INTO subscriptions (user_id, plan_id, start_date, end_date, status) VALUES
     (1, 1, '2023-01-01', '2024-01-01', 'active'),
@@ -327,12 +340,7 @@ public class SQLQueries {
     (5, 2, '2023-01-15', '2024-01-15', 'active'),
     (6, 2, '2023-02-15', '2023-05-15', 'expired'),
     (7, 2, '2023-03-15', NULL, 'canceled'),
-    (8, 3, '2023-01-10', '2024-01-10', 'active'),
-
-    INSERT INTO subscription_plans (name, price_monthly, price_annually, description, is_active) VALUES
-    ('Basic', 9.99, 99.99, 'Access to standard articles', true),
-    ('Premium', 19.99, 199.99, 'Access to premium content and early releases', true),
-    ('Pro', 29.99, 299.99, 'All features plus exclusive content and community access', true);
+    (8, 3, '2023-01-10', '2024-01-10', 'active');
     """;
 
     public static final String articlesPerAuthorPerMonthQuery = """
@@ -419,28 +427,29 @@ public class SQLQueries {
     """;
 
     public static final String topViewedArticlesByCategoryQuery = """
-    SELECT 
-        c.category_id,
-        c.name AS category_name,
-        a.article_id,
-        a.title,
-        a.view_count,
-        u.username AS author_name,
-        RANK() OVER (PARTITION BY c.category_id ORDER BY a.view_count DESC) AS rank_in_category
-    FROM 
-        articles a
-    JOIN 
-        categories c ON a.primary_category_id = c.category_id
-    JOIN 
-        authors au ON a.author_id = au.author_id
-    JOIN 
-        users u ON au.user_id = u.user_id
-    WHERE 
-        a.status = 'published'
-    QUALIFY
-        rank_in_category <= 3
-    ORDER BY 
-        c.name, a.view_count DESC
+    WITH ranked_articles AS (
+        SELECT 
+            c.category_id,
+            c.name AS category_name,
+            a.article_id,
+            a.title,
+            a.view_count,
+            u.username AS author_name,
+            RANK() OVER (PARTITION BY c.category_id ORDER BY a.view_count DESC) AS rank_in_category
+        FROM 
+            articles a
+        JOIN 
+            categories c ON a.primary_category_id = c.category_id
+        JOIN 
+            authors au ON a.author_id = au.author_id
+        JOIN 
+            users u ON au.user_id = u.user_id
+        WHERE 
+            a.status = 'published'
+    )
+    SELECT * FROM ranked_articles
+    WHERE rank_in_category <= 3
+    ORDER BY category_name, view_count DESC;
     """;
 
 }

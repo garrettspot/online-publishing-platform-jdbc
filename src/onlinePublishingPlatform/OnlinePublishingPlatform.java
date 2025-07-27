@@ -17,34 +17,38 @@ public class OnlinePublishingPlatform {
         while (true) {
             System.out.println("""
 
-            ---------------------------------    
-            Adam's Online Publishing Platform
-            ---------------------------------
+            ---------------------------------------------------
+            Adam's Online Publishing Platform Management System
+            ---------------------------------------------------
             1. View data
-            2. Register a user
-            3. User login
-            4. Exit
+            
+            2. Exit
             """);
             try {
                 System.out.print("Enter action: ");
-                int choice = sc.nextInt();
-                switch (choice) {
-                    case 1:
-                        viewData(); break;
-                    case 2:
-                        register(); break;
-                    case 3:
-                        login(); break;
-                    case 4:
-                        System.out.println("Closing Program"); return;
-                    default:
-                        System.out.println("Please enter a valid option!"); break;
+                if (sc.hasNextInt()) {
+                    int choice = sc.nextInt();
+                    switch (choice) {
+                        case 1:
+                            viewData(); break;
+                        // case 2:
+                        //     register(); break;
+                        // case 3:
+                        //     login(); break;
+                        case 2:
+                            System.out.println("Closing Program"); return;
+                        default:
+                            System.out.println("!!! --- Please enter a valid option! --- !!!"); break;
+                    }
+                } else {
+                    System.out.println("!!! --- Please enter a valid option! --- !!!");
+                    sc.nextLine();
                 }
-            } catch (InputMismatchException e) {
+            } catch (Exception e) {
                 System.out.println("""
-                -!-!-!-!-!-!-!-!-!-!-!
+                -!-!-!-!-!-!-!-!-!-!-!-
                 Please enter a number!
-                -!-!-!-!-!-!-!-!-!-!-!
+                -!-!-!-!-!-!-!-!-!-!-!-
                 """);
             }
         }
@@ -63,22 +67,29 @@ public class OnlinePublishingPlatform {
             """);
             try {
                 System.out.print("Select view: ");
-                int choice = sc.nextInt();
-                switch (choice) {
-                    case 1:
-                        database.printArticlesPerAuthorPerMonth(); break;
-                    case 2:
-                        database.printSubscriberChurnRate(); break;
-                    case 3:
-                        database.printTopViewedArticlesByCategory(); break;
-                    case 4:
-                        database.printPendingArticlesInReview(); break;
-                    case 5:
-                        database.printRevenuePerCategory(); break;
-                    case 0:
-                        return;
-                    default:
-                        System.out.println("Please enter a valid option!"); break;
+                if (sc.hasNextInt()) {
+                    int choice = sc.nextInt();
+                    switch (choice) {
+                        case 1:
+                            database.printArticlesPerAuthorPerMonth(); break;
+                        case 2:
+                            database.printSubscriberChurnRate(); break;
+                        case 3:
+                            database.printTopViewedArticlesByCategory(); break;
+                        case 4:
+                            database.printPendingArticlesInReview(); break;
+                        case 5:
+                            database.printRevenuePerCategory(); break;
+                        case 0:
+                            return;
+                        default:
+                            System.out.println("Please enter a valid option!"); break;
+                    }
+                    System.out.println("Input any key to go back");
+                    sc.next();
+                } else {
+                    System.out.println("! -- Please Enter a number -- !");
+                    sc.nextLine();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("""
@@ -87,6 +98,7 @@ public class OnlinePublishingPlatform {
                 -!-!-!-!-!-!-!-!-!-!-!
                 """);
             }
+            
         }
     }
 

@@ -75,10 +75,17 @@ public class SQLConnector {
                         stmt.executeUpdate(query);
                     } catch (Exception e) {
                         System.out.println("Failed query: " + query);
+                        e.printStackTrace();
                     }
                 });
         } catch (Exception e) {
             System.err.println("Error creating tables");
+            try {
+                Statement stmt = conn.createStatement();
+                stmt.executeUpdate("DROP DATABASE AdamsOnlinePublishingPlatform");
+            } catch (Exception f) {
+                System.err.println("Error dropping dp" + f.getMessage());
+            }
             e.printStackTrace();
         }
 
@@ -96,6 +103,7 @@ public class SQLConnector {
                         stmt.executeUpdate(query);
                     } catch (Exception e) {
                         System.out.println("Failed query: " + query);
+                        e.printStackTrace();
                     }
                 });
             } catch (Exception e) {
@@ -261,48 +269,37 @@ public class SQLConnector {
     try (Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query)) {
 
-        // Print table header
         System.out.println("\nTOP VIEWED ARTICLES BY CATEGORY");
         System.out.println("+------------+----------------------+------------+--------------------------------+------------------+----------------+");
         System.out.println("| Category ID| Category Name        | Article ID | Article Title                  | View Count       | Author         |");
         System.out.println("+------------+----------------------+------------+--------------------------------+------------------+----------------+");
 
         String currentCategory = "";
-        // int categoryCounter = 0;
-
-        // Print table rows
+        boolean isFirstInCategory = true;
+        
         while (rs.next()) {
             String categoryName = rs.getString("category_name");
+            int categoryId = rs.getInt("category_id");
             
-            // Print category header if new category
             if (!categoryName.equals(currentCategory)) {
                 currentCategory = categoryName;
-                // categoryCounter++;
-                System.out.printf("| %-10s | %-20s | %-10s | %-30s | %-16s | %-14s |%n",
-                    "CAT " + rs.getInt("category_id"),
-                    categoryName,
-                    "",
-                    "",
-                    "",
-                    "");
-                System.out.println("+------------+----------------------+------------+--------------------------------+------------------+----------------+");
+                isFirstInCategory = true;
             }
 
-            int articleId = rs.getInt("article_id");
-            String title = truncateString(rs.getString("title"), 30);
-            long viewCount = rs.getLong("view_count");
-            String author = truncateString(rs.getString("author_name"), 14);
-
+            // Print row - include category info only for first article in category
             System.out.printf("| %-10s | %-20s | %-10d | %-30s | %,16d | %-14s |%n",
-                "",
-                "",
-                articleId,
-                title,
-                viewCount,
-                author);
+                isFirstInCategory ? categoryId : "",
+                isFirstInCategory ? categoryName : "",
+                rs.getInt("article_id"),
+                truncateString(rs.getString("title"), 30),
+                rs.getLong("view_count"),
+                truncateString(rs.getString("author_name"), 14));
+            
+            isFirstInCategory = false;
         }
+
+        // Print table footer
         System.out.println("+------------+----------------------+------------+--------------------------------+------------------+----------------+");
-        
     } catch (SQLException e) {
         System.err.println("Error retrieving top viewed articles: " + e.getMessage());
     }
