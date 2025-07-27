@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(22)
+    }
+    sourceSets.main.java.srcDirs = ['src']
+}
+
+group = 'com.adambshohe.jdbc'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.mysql:mysql-connector-j:8.4.0'
+}
+
+application {
+    mainClass = 'Main'
+}
+
+shadowJar {
+    archiveBaseName.set('jdbc-app')
+    archiveVersion.set('1.0')
+    archiveClassifier.set('')
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+}
