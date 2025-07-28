@@ -8,7 +8,7 @@ public class Main {
 
         OnlinePublishingPlatform opp = new OnlinePublishingPlatform(sc);
         opp.startProgram();
-
-        sc.close();
+        
+        opp.close();
     }
 }
