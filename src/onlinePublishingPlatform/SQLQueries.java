@@ -6,7 +6,7 @@ public class SQLQueries {
     `user_id` integer PRIMARY KEY AUTO_INCREMENT,
     `username` varchar(255),
     `email` varchar(255),
-    `password_hash` varchar(255),
+    `password` varchar(255),
     `first_name` varchar(255),
     `last_name` varchar(255),
     `created_at` timestamp,
@@ -197,15 +197,15 @@ public class SQLQueries {
     ('author'),  
     ('subscriber');
 
-    INSERT INTO users (username, email, password_hash, first_name, last_name, created_at, profile_picture_url) VALUES
-    ('johndoe', 'john.doe@example.com', 'hashed_password_1', 'John', 'Doe', '2023-01-15 09:30:00', 'https://example.com/profiles/john.jpg'),
-    ('janedoe', 'jane.doe@example.com', 'hashed_password_2', 'Jane', 'Doe', '2023-02-20 10:15:00', 'https://example.com/profiles/jane.jpg'),
-    ('bobsmith', 'bob.smith@example.com', 'hashed_password_3', 'Bob', 'Smith', '2023-03-10 11:45:00', 'https://example.com/profiles/bob.jpg'),
-    ('alicej', 'alice.johnson@example.com', 'hashed_password_4', 'Alice', 'Johnson', '2023-04-05 14:20:00', 'https://example.com/profiles/alice.jpg'),
-    ('mikebrown', 'mike.brown@example.com', 'hashed_password_5', 'Mike', 'Brown', '2023-05-12 08:00:00', 'https://example.com/profiles/mike.jpg'),
-    ('sarahlee', 'sarah.lee@example.com', 'hashed_password_6', 'Sarah', 'Lee', '2023-06-18 13:10:00', 'https://example.com/profiles/sarah.jpg'),
-    ('davidwilson', 'david.wilson@example.com', 'hashed_password_7', 'David', 'Wilson', '2023-07-22 16:30:00', 'https://example.com/profiles/david.jpg'),
-    ('emilydavis', 'emily.davis@example.com', 'hashed_password_8', 'Emily', 'Davis', '2023-08-30 10:45:00', 'https://example.com/profiles/emily.jpg');
+    INSERT INTO users (username, email, password, first_name, last_name, created_at, profile_picture_url) VALUES
+    ('johndoe', 'john.doe@example.com', 'password_1', 'John', 'Doe', '2023-01-15 09:30:00', 'https://example.com/profiles/john.jpg'),
+    ('janedoe', 'jane.doe@example.com', 'password_2', 'Jane', 'Doe', '2023-02-20 10:15:00', 'https://example.com/profiles/jane.jpg'),
+    ('bobsmith', 'bob.smith@example.com', 'password_3', 'Bob', 'Smith', '2023-03-10 11:45:00', 'https://example.com/profiles/bob.jpg'),
+    ('alicej', 'alice.johnson@example.com', 'password_4', 'Alice', 'Johnson', '2023-04-05 14:20:00', 'https://example.com/profiles/alice.jpg'),
+    ('mikebrown', 'mike.brown@example.com', 'password_5', 'Mike', 'Brown', '2023-05-12 08:00:00', 'https://example.com/profiles/mike.jpg'),
+    ('sarahlee', 'sarah.lee@example.com', 'password_6', 'Sarah', 'Lee', '2023-06-18 13:10:00', 'https://example.com/profiles/sarah.jpg'),
+    ('davidwilson', 'david.wilson@example.com', 'password_7', 'David', 'Wilson', '2023-07-22 16:30:00', 'https://example.com/profiles/david.jpg'),
+    ('emilydavis', 'emily.davis@example.com', 'password_8', 'Emily', 'Davis', '2023-08-30 10:45:00', 'https://example.com/profiles/emily.jpg');
 
     INSERT INTO user_roles (user_id, role_id) VALUES
     (1, 1), 
