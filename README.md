@@ -50,6 +50,8 @@ A Java + MySQL management system for an online publishing platform. It manages a
 
 ## Usage
 
+![jdbc1-MadewithClipchamp-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/3b80c52f-7ef0-46e5-8a19-4a4375590cc6)
+
 - Use the CLI menu to:
   - View analytics and reports
   - Register new users
